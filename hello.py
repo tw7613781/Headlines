@@ -1,13 +1,13 @@
 #coding:utf-8
 
 import feedparser
-
 from flask import Flask
 from flask import render_template
+from flask import request
 
 app = Flask(__name__)
 
-BBC_FEEDS = {
+RSS_FEEDS = {
     'bbc':'http://feeds.bbci.co.uk/news/rss.xml',
     'cnn':'http://rss.cnn.com/rss/edition.rss',
     'fox':'http://feeds.foxnews.com/foxnews/latest',
@@ -15,13 +15,16 @@ BBC_FEEDS = {
 }
 
 @app.route('/')
-@app.route('/<publication>')
-def get_news(publication='bbc'):
-    feed = feedparser.parse(BBC_FEEDS[publication])
+def get_news():
+    query = request.args.get('publication')
+    if not query or query.lower() not in RSS_FEEDS:
+        publication = 'bbc'
+    else:
+        publication = query.lower()
     # return dictionary including all news storys
+    feed = feedparser.parse(RSS_FEEDS[publication])
     return render_template('home.html',
                            articles = feed['entries'])
-    # using dict.get() to avoid key missing causing runtime error
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
