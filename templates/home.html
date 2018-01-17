@@ -28,8 +28,13 @@
         <input type="submit" value="Submit">
     </form>
     1 {{currency_from}} = {{currency_to}} {{rate}}
+    <h2>News</h2>
     <form>
-        <input type="text" name="publication" placeholder="search" />
+        <select name="publication">
+            {% for source in rss_sources %}
+            <option value="{{source}}" {{'selected="selected"' if rss_source == source}}">{{source}}</option>
+            {% endfor %}
+        </select>
         <input type="submit" value="Submit" />
     </form>
     {% for article in articles %}
