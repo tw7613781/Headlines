@@ -13,13 +13,14 @@ from flask import make_response
 app = Flask(__name__)
 
 RSS_FEEDS = {
-    'bbc':'http://feeds.bbci.co.uk/news/rss.xml',
-    'cnn':'http://rss.cnn.com/rss/edition.rss',
-    'fox':'http://feeds.foxnews.com/foxnews/latest',
-    'iol':'http://www.iol.co.za/cmlink/1.640'
+    'BBC':'http://feeds.bbci.co.uk/news/rss.xml',
+    'CNN':'http://rss.cnn.com/rss/edition.rss',
+    'FOX':'http://feeds.foxnews.com/foxnews/latest',
+    'IOL':'http://www.iol.co.za/cmlink/1.640',
+    'QQ':'http://view.news.qq.com/index2010/zhuanti/ztrss.xml'
 }
 
-DEFAULTS = {'publication':'bbc',
+DEFAULTS = {'publication':'BBC',
             'city':'Seoul,KR',
             'currency_from':'CNY',
             'currency_to':'KRW'}
