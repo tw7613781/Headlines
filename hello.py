@@ -95,8 +95,12 @@ def get_rate(frm,to):
 def get_value_with_fallback(key):
     if request.args.get(key):
         return request.args.get(key)
-    if request.cookies.get(key):
-        return request.cookies.get(key)
+    if key == 'publication':
+        if request.cookies.get(key) and key in RSS_FEEDS:
+            return request.cookies.get(key)
+    else:
+        if request.cookies.get(key):
+            return request.cookies.get(key)
     return DEFAULTS[key]
 
 if __name__ == '__main__':
