@@ -96,8 +96,9 @@ def get_value_with_fallback(key):
     if request.args.get(key):
         return request.args.get(key)
     if key == 'publication':
-        if request.cookies.get(key) and key in RSS_FEEDS:
-            return request.cookies.get(key)
+        cookies_value = request.cookies.get(key)
+        if cookies_value and cookies_value in RSS_FEEDS:
+            return cookies_value
     else:
         if request.cookies.get(key):
             return request.cookies.get(key)
